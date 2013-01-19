@@ -27,9 +27,16 @@ module CoaOpScraper
 			@docket_no
 		end
 	
-		def process!(&meth)
-			meth.send(self)
-		end
+    def save
+      return false if find_match_in_database(self)
+      super
+    end
+
+    module ClassMethods
+      def find_match_in_database(op)
+        self.where(:docket_no => op.docket_no).where(:data_after => op.opinion_metadata).first
+      end
+    end
 
 	protected
 

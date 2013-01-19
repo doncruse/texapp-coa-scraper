@@ -80,6 +80,19 @@ module CoaOpScraper
 			end
 		end
 
+    # Idea is that this could be invoked from outside the gem, and then 
+    # each of these URLs could be inserted into a queue to spread out the
+    # load against the server. (An improvement would be a method that took
+    # a function as an argument and did that function on each element.)
+		def self.urls_for_historical_range(coa, start_date, end_date)
+      result = []
+			(start_date .. end_date).each do |target_date|
+        next unless @@check_weekends or target_date.weekday?
+        result << self.url_for_coa_for_date(coa, target_date)
+			end
+      result
+		end
+
 		def self.url_for_coa_for_date(coa,date)
 			if CoaOpScraper::TAMES_COAS[coa]
 				CoaOpScraper::Tames.url_for_coa_for_date(coa,date)
