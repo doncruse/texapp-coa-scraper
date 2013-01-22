@@ -26,6 +26,7 @@ module CoaOpScraper
     "05" => "5thcoa",
     "06" => "6thcoa",
     "09" => "9thcoa",
+    '11' => '11thcoa',
     "12" => "12thcoa",
     "14" => "14thcoa"
   }
@@ -36,7 +37,6 @@ module CoaOpScraper
     '07' => '7thcoa',
     '08' => '8thcoa',
     '10' => '10thcoa',
-    '11' => '11thcoa',
     '13' => '13thcoa'										
   }
 
