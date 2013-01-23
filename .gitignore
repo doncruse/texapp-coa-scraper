@@ -12,6 +12,12 @@ doc
 # bundler
 .bundle
 
+# swap files
+*.swp
+*.swo
+**/*.swp
+**/*.swo
+
 # jeweler generated
 pkg
 

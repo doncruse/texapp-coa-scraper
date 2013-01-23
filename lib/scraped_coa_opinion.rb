@@ -1,6 +1,6 @@
 module CoaOpScraper
   class OpinionMetadata
-    attr_accessor :docket_no, :date, :author, :disposition
+    attr_accessor :docket_no, :date, :author, :disposition, :metadata
 
     def initialize(scraped_metadata)
       dno = CoaOpScraper::CoaDocketNo.new(scraped_metadata[:docket_no])
@@ -27,15 +27,8 @@ module CoaOpScraper
       @docket_no
     end
 
-    def save
-      return false if find_match_in_database(self)
-      super
-    end
-
-    module ClassMethods
-      def find_match_in_database(op)
-        self.where(:docket_no => op.docket_no).where(:data_after => op.opinion_metadata).first
-      end
+    def metadata
+      @metadata
     end
 
     protected
@@ -52,32 +45,6 @@ module CoaOpScraper
         @docket = CoaDocket.insert(@dno)
       end
     end
-
-    def associated_decision_object
-      if @decision = @docket.decisions.where(:date => @date).first
-        @decision
-      else
-        @decision = @docket.decisions.insert({ :date => @date, :disposition => @disposition })
-      end
-    end
-
-    def insert_opinion_into_database!
-      @docket.soft_insert_docket_page_url(@metadata["docket_page_url"])
-      @docket.soft_insert_case_style(@metadata["case_style"])
-      @docket.soft_insert_origin(@metadata["origin"])
-      @decision.soft_insert_diposition(@metadata["disposition"])
-
-      op = @docket.decisions.where(:decision_id => @decision.id).opinions.new
-      op.scraped_disposition = @disposition		
-      op.date = @date
-      op.author_string = @metadata["author_string"]
-      op.panel_string = @metadata["panel_string"]
-      op.scraped_case_style = @metadata["case_style"]
-      op.scraped_origin = @metadata["origin"]
-      op.scraped_urls = @metadata["opinion_urls"]
-      op.commit_insert
-    end
-    # Note: without a guard, this is destructive of previously scraped data
 
     # Opinion(id: integer, docket_id: integer, decision_id: integer, scraped_case_style: string, scraped_disposition: string, scraped_origin: string, scraped_author: string, scraped_panel: string, scraped_urls: string, author: string, panel: string, date: date, disposition: string, court_url: string, court_url_format: string, texapp_url: string, per_curiam: boolean, memorandum: boolean, not_for_publication: boolean, published: boolean, precedential: boolean, withdrawn: boolean, created_at: datetime, updated_at: datetime) 
 
