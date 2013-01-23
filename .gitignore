@@ -18,6 +18,8 @@ doc
 **/*.swp
 **/*.swo
 
+.rvmrc
+
 # jeweler generated
 pkg
 
