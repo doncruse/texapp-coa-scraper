@@ -10,7 +10,7 @@ module CoaOpScraper
 
     def self.url_for_coa_for_date(coa,date)
       datestring = date.to_date.strftime("%Y%m%d")
-      root_path = "http://www.#{CoaOpScraper::LEGACY_COAS[coa]}.courts.state.tx.us/"
+      root_path = "http://www.#{coa.to_i.ordinalize}coa.courts.state.tx.us/"
       root_path + "opinions/docket.asp?FullDate=#{datestring}"
     end
 
