@@ -37,9 +37,22 @@ The simplest way to use this gem is to specify a particular court of appeals
 particular date on which you want to check for opinions.  The gem will then
 determine the correct URL to use, check that page, and parse what is found to
 retrieve the metadata for each opinion released on that date.  What you get back
-is a list of that metadata.  (The data for each case is a simple hash.  The overall
+is a list of that metadata.
+
+The data for each opinion is a simple hash.  The overall
 set of results is just an array of those hashes, or an empty array if no
-results were found for that page.)
+results were found for that page. Here is an example of the hash for one opinion:
+
+> { :author_string => "Opinion by Justice Pemberton", 
+    :opinion_urls => {"html"=>"/opinions/htmlopinion.asp?OpinionId=20764", 
+                      "pdf"=>"/opinions/PDFOpinion.asp?OpinionId=20764"},
+    :disposition => "AFFIRMED:", 
+    :panel_string => "(Before Chief Justice Jones, Justices Pemberton and Henson)", 
+    :release_date => Fri, 20 Jan 2012, 
+    :case_style => "Janeen Denise Smith v. The State of Texas", 
+    :origin => "Appeal from County Court at Law No. 1 of Caldwell County", 
+    :docket_no => "03-10-00725-CR", 
+    :docket_page_url => "/opinions/case.asp?FilingID=15750" }
 
 It's up to you to write code that does something interesting with that metadata &mdash;
 such as storing it or downloading the opinion PDFs themselves (as is being done
