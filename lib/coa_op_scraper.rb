@@ -35,7 +35,7 @@ module CoaOpScraper
   # Each element of the array is a hash, consisting of enough information
   # to identify the case and the URLs for any opinions linked off the court page.
 
-  def self.scrape_opinion_list_for_coa_date(coa, target_date)
+  def self.scrape_one_opinion_list(coa, target_date)
     url = self.url_for_coa_for_date(coa, target_date)
     self.parse_coa_opinion_list_at(coa, url)
   end
