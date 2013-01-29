@@ -38,7 +38,6 @@ Gem::Specification.new do |s|
     "spec/vcr/legacy/02-2003-02-20.json",
     "spec/vcr/legacy/03-2013-01-10.json",
     "spec/vcr/tames/01-2012-01-19.json",
-    "spec/vcr/tames/01-2013-01-10.json",
     "spec/vcr/tames/12-2003-01-31.json",
     "spec/vcr/tames/14-2005-01-20.json"
   ]
