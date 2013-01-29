@@ -20,30 +20,31 @@ module CoaOpScraper
   TAMES_COAS = [ "01", "04", "05", "06", "09", "11", "12", "14" ]
   LEGACY_COAS = [ "02", "03", "07", "08", "10", "13" ]
 
-  # This is the method that needs to be invoked by cron, early and late each day.
-  def self.update_today!
-    target_date = Date.today
-    return unless @@check_weekends or target_date.weekday?
-    (TAMES_COAS + LEGACY_COAS).each do |coa|
-      self.process_list_for_coa_date!(coa, target_date, CURRENT_THROTTLE)
+  ############################################################
+  # This is the easiest method to use here.  Feed it a COA value
+  # (in the form "03", for example) and the date for which you
+  # want the results (in the form of a Ruby date object).
+  #
+  def self.scrape_one_opinion_list(coa,target_date)
+    doc = self.retrieve_list_for_coa_for_date(coa,target_date)
+    if CoaOpScraper::TAMES_COAS[coa]
+      CoaOpScraper::Tames.parse_opinion_list(doc)
+    elsif CoaOpScraper::LEGACY_COAS[coa]
+      CoaOpScraper::Legacy.parse_opinion_list(doc)
     end
   end
 
-  def self.parse_coa_opinion_list_at(coa, url)
-    self.scrape_one_opinion_list(coa, url) || []
-  end
-  # Each element of the array is a hash, consisting of enough information
-  # to identify the case and the URLs for any opinions linked off the court page.
+  ############################################################
+  # These methods would be useful to populate a queue of opinion
+  # lists to check later.
+  # 
+  # The #urls_for_historical_range method will, as expected,
+  # compute a list of the URLs that are appropriate (excluding
+  # weekends by default).
+  #
+  # The #parse_coa_opinion_list_at method will take a coa number
+  # and a URL and return back a list of the results.
 
-  def self.scrape_one_opinion_list(coa, target_date)
-    url = self.url_for_coa_for_date(coa, target_date)
-    self.parse_coa_opinion_list_at(coa, url)
-  end
-
-  # This method would provide a list of the URLs for a particular COA.
-  # This could be combined with the parse_coa_opinion_list_at method above
-  # to feed a queue that spead this work out across a period of time to lessen
-  # the stress on delicate court servers.
   def self.urls_for_historical_range(coa, start_date, end_date)
     result = []
     (start_date .. end_date).each do |target_date|
@@ -51,7 +52,13 @@ module CoaOpScraper
       result << self.url_for_coa_for_date(coa, target_date)
     end
     result
-  end
+  end # returns an array of URLs
+
+  def self.parse_coa_opinion_list_at(coa, url)
+    self.scrape_one_opinion_list(coa, url) || []
+  end # takes a URL, returns a list of the opinion data
+
+protected
 
   def self.url_for_coa_for_date(coa,date)
     if CoaOpScraper::TAMES_COAS.include?(coa)
@@ -65,16 +72,6 @@ module CoaOpScraper
     url = self.url_for_coa_for_date(coa,date)
     open(url)
   end
-
-  def self.scrape_one_opinion_list(coa,target_date)
-    doc = self.retrieve_list_for_coa_for_date(coa,target_date)
-    if CoaOpScraper::TAMES_COAS[coa]
-      CoaOpScraper::Tames.parse_opinion_list(doc)
-    elsif CoaOpScraper::LEGACY_COAS[coa]
-      CoaOpScraper::Legacy.parse_opinion_list(doc)
-    end
-  end
-
 end
 
 # This is required (and helpful) to parse Texas court docket pages
