@@ -105,10 +105,4 @@ describe "TamesScraper" do
 	
 	end
 
-	# Lots of missing opinions (!) - why?!
-	# http://www.search.txcourts.gov/Docket.aspx?coa=coa04&FullDate=02/26/2003
-
-	# Fifth COA is missing opinions even as recently as 2012 (?!)
-	# (It was moved from a very different system.)
-	
 end

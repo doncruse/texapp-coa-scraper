@@ -20,11 +20,4 @@ describe "Main Controller" do
 		d = CoaOpScraper::CoaDocketNo.new("3-4-24-CR")
 		d.canonical.should eq("03-04-00024-CR")
 	end
-
-	it "each pass invokes the method passed"
-	# YES: I want to pass a method to this when invoking it,
-	# and have the scraper call that method on each successful scrape
-	# of a new opinion. That method will be something like "create_if_new"
-	# against a subclass of ESD for CoaOpinions...
-
 end
