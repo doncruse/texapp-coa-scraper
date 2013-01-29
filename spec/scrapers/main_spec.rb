@@ -11,11 +11,6 @@ describe "Main Controller" do
 		target_date.weekday?.should eq(false)
 	end
 
-	it "should be able to access OpinionMetadata model" do
-		so = CoaOpScraper::OpinionMetadata.new({ :docket_no => "03-03-00001-CV" })
-		so.should_not be_nil
-	end
-	
 	it "should be able to access CoaDocketNo model" do
 		d = CoaOpScraper::CoaDocketNo.new("3-4-24-CR")
 		d.canonical.should eq("03-04-00024-CR")
