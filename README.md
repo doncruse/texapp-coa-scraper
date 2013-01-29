@@ -11,7 +11,7 @@ TAMES system employed by the Texas Supreme Court.
 
 ### Why does this gem exist?
 
-It was developed as part of the TexApp.org project [github](http://github.com/texapp),
+It was developed as part of the TexApp.org project ([github](http://github.com/texapp)),
 which aims to ensure that Texas's court of appeals opinions are available in
 a reliable &mdash; and citable &mdash; location available to the general public,
 members of the bar, and the court system itself.
@@ -58,7 +58,7 @@ It's up to you to write code that does something interesting with that metadata 
 such as storing it or downloading the opinion PDFs themselves (as is being done
 for TexApp.org).
 
-== Copyright
+## Copyright
 
 Copyright (c) 2013 Don Cruse. See LICENSE.txt for
 further details.
