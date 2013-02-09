@@ -1,4 +1,4 @@
-# Coa Op Scraper - a gem for Texas courts of appeals
+# Texas COA Op Scraper - a gem for Texas courts of appeals
 
 ### What's this about?
 
