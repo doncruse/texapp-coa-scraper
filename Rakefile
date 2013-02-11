@@ -29,3 +29,4 @@ require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new
 task :default => :spec
 
+Rake::Task[:release].prerequisites.delete('gemcutter:release')

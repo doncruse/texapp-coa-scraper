@@ -17,8 +17,8 @@ module CoaOpScraper
 
   # A court's placement in one of these two hashes tells you about the webpage format
   # currently used by that court.
-  TAMES_COAS = [ "01", "04", "05", "06", "09", "11", "12", "14" ]
-  LEGACY_COAS = [ "02", "03", "07", "08", "10", "13" ]
+  TAMES_COAS = [ "01", "03", "04", "05", "06", "09", "11", "12", "14" ]
+  LEGACY_COAS = [ "02", "07", "08", "10", "13" ]
 
   ############################################################
   # This is the easiest method to use here.  Feed it a COA value
@@ -27,9 +27,9 @@ module CoaOpScraper
   #
   def self.scrape_one_opinion_list(coa,target_date)
     doc = self.retrieve_list_for_coa_for_date(coa,target_date)
-    if CoaOpScraper::TAMES_COAS[coa]
+    if CoaOpScraper::TAMES_COAS.include?(coa)
       CoaOpScraper::Tames.parse_opinion_list(doc)
-    elsif CoaOpScraper::LEGACY_COAS[coa]
+    elsif CoaOpScraper::LEGACY_COAS.include?(coa)
       CoaOpScraper::Legacy.parse_opinion_list(doc)
     end
   end

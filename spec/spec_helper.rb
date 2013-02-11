@@ -1,5 +1,5 @@
 $:.unshift File.dirname(__FILE__) + '/../lib'
-require 'coa_op_scraper'
+require 'coa-op-scraper'
 require 'support/vcr'
 
 RSpec.configure do |config|

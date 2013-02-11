@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "coa-op-scraper"
-  s.version = "0.2.0"
+  s.version = "0.2.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Don Cruse"]
-  s.date = "2013-01-29"
+  s.date = "2013-02-11"
   s.description = "A scraper for intermediate appellate opinions"
   s.email = "doncruse@gmail.com"
   s.extra_rdoc_files = [
@@ -26,8 +26,8 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "coa-op-scraper.gemspec",
+    "lib/coa-op-scraper.rb",
     "lib/coa_docket_no.rb",
-    "lib/coa_op_scraper.rb",
     "lib/legacy.rb",
     "lib/tames.rb",
     "spec/scrapers/legacy_scraper_spec.rb",
