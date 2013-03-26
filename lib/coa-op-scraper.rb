@@ -17,8 +17,8 @@ module CoaOpScraper
 
   # A court's placement in one of these two hashes tells you about the webpage format
   # currently used by that court.
-  TAMES_COAS = [ "01", "03", "04", "05", "06", "09", "11", "12", "14" ]
-  LEGACY_COAS = [ "02", "07", "08", "10", "13" ]
+  TAMES_COAS = [ "01", "02", "03", "04", "05", "06", "08", "09", "11", "12", "14" ]
+  LEGACY_COAS = [ "07", "10", "13" ]
 
   ############################################################
   # This is the easiest method to use here.  Feed it a COA value
