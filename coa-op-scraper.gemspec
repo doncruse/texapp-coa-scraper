@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "coa-op-scraper"
-  s.version = "0.2.7"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Don Cruse"]
-  s.date = "2013-05-08"
+  s.date = "2013-06-08"
   s.description = "A scraper for intermediate appellate opinions"
   s.email = "doncruse@gmail.com"
   s.extra_rdoc_files = [
@@ -32,12 +32,18 @@ Gem::Specification.new do |s|
     "lib/tames.rb",
     "spec/scrapers/legacy_scraper_spec.rb",
     "spec/scrapers/main_spec.rb",
+    "spec/scrapers/tames_coa_02_03_spec.rb",
+    "spec/scrapers/tames_scraper_05_2013_spec.rb",
     "spec/scrapers/tames_scraper_spec.rb",
     "spec/spec_helper.rb",
     "spec/support/vcr.rb",
     "spec/vcr/legacy/02-2003-02-20.json",
     "spec/vcr/legacy/03-2013-01-10.json",
+    "spec/vcr/legacy/13-2013-01-10.json",
     "spec/vcr/tames/01-2012-01-19.json",
+    "spec/vcr/tames/02-2003-02-20.json",
+    "spec/vcr/tames/03-2013-01-10.json",
+    "spec/vcr/tames/03-2013-06-07.json",
     "spec/vcr/tames/12-2003-01-31.json",
     "spec/vcr/tames/14-2005-01-20.json"
   ]
