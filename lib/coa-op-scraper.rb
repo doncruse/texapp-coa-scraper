@@ -28,7 +28,7 @@ module CoaOpScraper
   def self.scrape_one_opinion_list(coa,target_date)
     doc = self.retrieve_list_for_coa_for_date(coa,target_date)
     if CoaOpScraper::TAMES_COAS.include?(coa)
-      CoaOpScraper::Tames.parse_opinion_list(doc)
+      CoaOpScraper::Tames.parse_opinion_list(doc, coa)
     elsif CoaOpScraper::LEGACY_COAS.include?(coa)
       CoaOpScraper::Legacy.parse_opinion_list(doc)
     end

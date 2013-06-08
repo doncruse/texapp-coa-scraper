@@ -57,10 +57,10 @@ module CoaOpScraper
         source = docket_targets[i].search("td").last.inner_text
         parts = source.split("--")
         if parts.size == 2
-          result[:case_style] = parts.first
+          result[:case_style] = parts.first.gsub("  "," ")
           result[:origin] = parts.second
         elsif parts.size == 1
-          result[:case_style] = parts.first
+          result[:case_style] = parts.first.gsub("  "," ")
         end
 
         result[:docket_no] = docket_targets[i].search("a").inner_text

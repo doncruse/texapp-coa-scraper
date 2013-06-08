@@ -10,15 +10,15 @@ describe "TamesScraper" do
 			VCR.use_cassette "tames/#{@coa}-#{@date.to_s}" do
 				@doc = CoaOpScraper.retrieve_list_for_coa_for_date(@coa,@date)
 			end
-			@data_array = CoaOpScraper::Tames.parse_opinion_list(@doc)
+			@data_array = CoaOpScraper::Tames.parse_opinion_list(@doc, @coa)
 		end
 
 		it "should retrieve something" do
 			@doc.should_not be_nil
 		end
 
-		it "should retrieve four items" do
-			@data_array.count.should eq(28)
+		it "should retrieve all items" do
+			@data_array.count.should eq(31)
 		end
 
 		it "should see entry for dno" do
@@ -74,7 +74,7 @@ describe "TamesScraper" do
 			VCR.use_cassette "tames/#{@coa}-#{@date.to_s}" do
 				@doc = CoaOpScraper.retrieve_list_for_coa_for_date(@coa,@date)
 			end
-			@data_array = CoaOpScraper::Tames.parse_opinion_list(@doc)
+			@data_array = CoaOpScraper::Tames.parse_opinion_list(@doc, @coa)
 		end
 	
 		it "should handle entry showing opinion withdrawn" do
@@ -96,7 +96,7 @@ describe "TamesScraper" do
 			VCR.use_cassette "tames/#{@coa}-#{@date.to_s}" do
 				@doc = CoaOpScraper.retrieve_list_for_coa_for_date(@coa,@date)
 			end
-			@data_array = CoaOpScraper::Tames.parse_opinion_list(@doc)
+			@data_array = CoaOpScraper::Tames.parse_opinion_list(@doc, @coa)
 		end
 	
 		it "should handle entry showing opinion withdrawn" do
