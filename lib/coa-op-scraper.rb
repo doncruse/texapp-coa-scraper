@@ -3,6 +3,7 @@ module CoaOpScraper
   require 'legacy'
   require 'tames'
   require 'coa_docket_no'
+  require 'tames_link'
 
   require 'date'
   require 'open-uri'

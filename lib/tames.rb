@@ -28,28 +28,16 @@ module CoaOpScraper
         result = Hash.new
         result[:release_date] = release_date
         result[:opinion_urls] = {}
-        t.search("a").each do |link|
-          if link.inner_text.match(/\d\d\d\d/)
-            result[:docket_no] = link.inner_text
-            result[:docket_page_url] = link["href"]
+        t.search("a").each do |l|
+          link = TamesLink.new(l, coa_number)
+          if link.is_docket_link?
+            result[:docket_no] = link.docket_no
+            result[:docket_page_url] = link.docket_page_url
             next
           end
-          text_part = link.inner_text.downcase
-          possible_link = link["href"]
-          possible_link.gsub!(/(?<=coa=).*CurrentWebState.*(?=&DT)/,"coa#{coa_number.to_s}") if coa_number
-#          \" + this.CurrentWebState.CurrentCourt + @\"
-          if text_part.match(/pdf/)
-            result[:opinion_urls]["pdf"] = possible_link
-          elsif text_part.match(/htm/)
-            result[:opinion_urls]["html"] = possible_link
-          elsif text_part.match(/wpd/)
-            result[:opinion_urls]["wpd"] = possible_link
-          elsif text_part.match(/doc/)
-            result[:opinion_urls]["doc"] = possible_link
-          else
-            unknown_type = text_part.downcase.gsub("","").gsub("","").strip_both_ends
-            result[:opinion_urls]["#{unknown_type}"] = link["href"]
-          end # if/thens of opinion types
+          if link.is_opinion_link?
+            result[:opinion_urls][link.document_type] = link.link_target
+          end
         end # link/opinion loop
 
         # within the opinion set
