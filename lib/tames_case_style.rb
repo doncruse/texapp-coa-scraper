@@ -53,14 +53,14 @@ module CoaOpScraper
 
       def text_outside_of_span
         possible_match = overall_text.match(/#{text_within_span}(.*)/)
-        possible_match.captures.first.strip_both_ends if possible_match.captures.first
+        capture = possible_match.captures.first
+        capture.strip_both_ends if capture and capture.strip_both_ends.size > 0
       end # might return nil
 
       # <td><span>Party Name v. Other Party</span> Court name where from</td>
       def new_format? 
         @new_format ||= (not_divided_by_punctuation and
-                         begins_with_spanned_text and
-                         isnt_only_spanned_text)
+                         begins_with_spanned_text)
       end
 
       def begins_with_spanned_text
