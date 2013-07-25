@@ -4,6 +4,7 @@ module CoaOpScraper
   require 'tames'
   require 'coa_docket_no'
   require 'tames_link'
+  require 'tames_case_style'
 
   require 'date'
   require 'open-uri'

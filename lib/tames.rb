@@ -54,28 +54,10 @@ module CoaOpScraper
         result[:panel_string] = t.search("td")[-1].to_html.split(/[<>]/).select { |x| x.match(/Ju[ds]/) }.join(",").gsub("  "," ")
         result[:disposition] = t.search("td")[-2].inner_text.downcase.strip_both_ends.gsub(/:$/,"")
 
-        source = t.search("td")[-3].inner_text
-        parts = source.split("--")
-        if parts.size == 2
-          result[:case_style] = parts.first.strip_both_ends
-          result[:origin] = parts.second.strip_both_ends
-        elsif parts.size == 1
-          fallback = t.search("td/span").first
-          # Added 2013-06-07 to deal with new formats of COA3, with bolded text
-          if fallback and fallback.inner_text[0,10] == parts.first[0,10]
-            result[:case_style] = fallback.inner_text.strip_both_ends
-            if result[:case_style] != parts.first.strip_both_ends
-              fallback_origin = parts.first.strip_both_ends
-              fallback_origin.slice!(result[:case_style])
-              result[:origin] = fallback_origin.strip_both_ends if fallback_origin and fallback_origin.size > 0 
-            end
-          else
-            result[:case_style] = parts.first.strip_both_ends
-          end
-        end
-        # ensuring enough info to salvage if I need to
-        #next if result[:docket_no].nil? or result[:docket_page_url].nil?
-        #next if result[:docket_no].blank? or result[:docket_page_url].blank?
+        tames_style = TamesCaseStyle.new(t)
+        result[:case_style] = tames_style.case_style
+        result[:origin] = tames_style.case_origin if tames_style.case_origin
+
         results << result
       end
       results
