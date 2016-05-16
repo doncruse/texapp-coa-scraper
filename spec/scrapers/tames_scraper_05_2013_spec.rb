@@ -44,10 +44,10 @@ describe "Tames format has evolved by June 2013" do
 
     # missing PDF here for the opinion, as of the next day
     # this is a problem at the court level, which should be flagged
-		it "should see entry for dno - which has no published PDF?" do
+		it "should see entry for dno - which has now does have a published PDF" do
 			dno = "03-12-00546-CV"
 			@data_array.select { |x| x[:docket_no] == dno }.count.should_not eq(0)
-			@data_array.select { |x| x[:docket_no] == dno }.first[:opinion_urls].should be_empty
+			@data_array.select { |x| x[:docket_no] == dno }.first[:opinion_urls].should_not be_empty
 		end
 
 		it "should see full data for 03-12-00843-CV" do
@@ -55,8 +55,10 @@ describe "Tames format has evolved by June 2013" do
 			targets = @data_array.select { |x| x[:docket_no] == dno }
 			targets.count.should eq(1)
 			target = targets.first
-			target[:author_string].should eq("Memorandum Opinion by Chief Justice Jones")
-			target[:panel_string].should eq("Chief Justice Jones,Justice Goodwin,Justice Field")
+			target[:author_string].should match(/Justice Jones/)
+			target[:panel_string].should match(/Justice Jones/)
+			target[:panel_string].should match(/Justice Goodwin/)
+			target[:panel_string].should match(/Justice Field/)
 			target[:origin].should eq("Appeal from County Court at Law No. 1 of Travis County")
 			target[:case_style].should eq("AZ & Associates, L.P. d/b/a Red Robin v. Amstar Engineering, Inc.")
 			target[:disposition].downcase.should eq("dismissed on appellant's motion")

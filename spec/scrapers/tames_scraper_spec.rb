@@ -82,7 +82,9 @@ describe "TamesScraper" do
 			targets = @data_array.select { |x| x[:docket_no] == dno }
 			targets.count.should eq(1)
 			target = targets.first
-			target[:panel_string].should match(/Visiting Judge/)
+			target[:panel_string].should match(/Hudson/)
+			target[:panel_string].should match(/Frost/)
+			target[:panel_string].should match(/Anderson/)
 		end
 
 	end
