@@ -8,6 +8,7 @@ module CoaOpScraper
 
   require 'date'
   require 'open-uri'
+  require 'active_support'
   require 'active_support/core_ext'
 
   # The Texas appellate websites are sometimes fragile. 

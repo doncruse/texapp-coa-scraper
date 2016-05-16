@@ -2,6 +2,7 @@
 require 'nokogiri'
 require 'open-uri'
 require 'date'
+require 'active_support'
 require 'active_support/core_ext'
 
 module CoaOpScraper
