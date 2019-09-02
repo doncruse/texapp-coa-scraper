@@ -10,12 +10,12 @@ module CoaOpScraper
   require 'open-uri'
   require 'active_support/core_ext'
 
-  # The Texas appellate websites are sometimes fragile. 
+  # The Texas appellate websites are sometimes fragile.
   # These sleep intervals should give ample time between requests.
   HISTORICAL_THROTTLE = 10
   CURRENT_THROTTLE = 5
 
-  @@check_weekends = FALSE
+  @@check_weekends = false
 
   # A court's placement in one of these two hashes tells you about the webpage format
   # currently used by that court.
@@ -39,7 +39,7 @@ module CoaOpScraper
   ############################################################
   # These methods would be useful to populate a queue of opinion
   # lists to check later.
-  # 
+  #
   # The #urls_for_historical_range method will, as expected,
   # compute a list of the URLs that are appropriate (excluding
   # weekends by default).
