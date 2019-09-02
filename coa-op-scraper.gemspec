@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "coa-op-scraper"
-  s.version = "0.3.0"
+  s.version = "0.5.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Don Cruse"]
-  s.date = "2013-06-08"
+  s.date = "2016-05-16"
   s.description = "A scraper for intermediate appellate opinions"
   s.email = "doncruse@gmail.com"
   s.extra_rdoc_files = [
@@ -48,7 +48,7 @@ Gem::Specification.new do |s|
     "spec/vcr/tames/14-2005-01-20.json"
   ]
   s.homepage = "http://github.com/doncruse/coa-op-scraper"
-  s.licenses = ["(c)2013 Don Cruse"]
+  s.licenses = ["(c)2016 Don Cruse"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.25"
   s.summary = "A scraper for intermediate Texas appellate opinions"

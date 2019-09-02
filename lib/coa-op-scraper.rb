@@ -8,6 +8,7 @@ module CoaOpScraper
 
   require 'date'
   require 'open-uri'
+  require 'active_support'
   require 'active_support/core_ext'
 
   # The Texas appellate websites are sometimes fragile.
@@ -19,8 +20,8 @@ module CoaOpScraper
 
   # A court's placement in one of these two hashes tells you about the webpage format
   # currently used by that court.
-  TAMES_COAS = [ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "14" ]
-  LEGACY_COAS = [ "13" ]
+  TAMES_COAS = [ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14" ]
+  LEGACY_COAS = [ ]
 
   ############################################################
   # This is the easiest method to use here.  Feed it a COA value

@@ -42,7 +42,9 @@ describe "Courts moved from legacy to Tames" do
 			target = targets.first
 			target[:author_string].should eq("Memorandum Opinion by Justice Puryear")
 			target[:release_date].should eq(@date)
-			target[:panel_string].should eq("Justice Puryear,Justice Pemberton,Justice Rose")
+			target[:panel_string].should match(/Justice Puryear/)
+			target[:panel_string].should match(/Justice Pemberton/)
+			target[:panel_string].should match(/Justice Rose/)
 			target[:case_style].should eq("In re Carol Gino")
 			target[:origin].should eq("Appeal from 335th District Court of Bastrop County")
 			target[:disposition].downcase.should eq("motion or writ denied")
@@ -103,7 +105,7 @@ describe "Courts moved from legacy to Tames" do
 			target[:docket_page_url].should eq("Case.aspx?cn=#{dno}")
 			target[:opinion_urls].should_not be_empty
 			target[:opinion_urls].count.should eq(2)
-			target[:opinion_urls]["html"].should eq("SearchMedia.aspx?MediaVersionID=902e2f87-66a2-4775-8e13-6a42337e762f&MediaID=24f69484-2581-4f22-89de-498a4d609014&coa=coa02&DT=Opinion")
+			target[:opinion_urls]["html"].should eq("SearchMedia.aspx?MediaVersionID=902e2f87-66a2-4775-8e13-6a42337e762f&MediaID=24f69484-2581-4f22-89de-498a4d609014&coa=COA02&DT=Opinion")
 		end
 	end
 		

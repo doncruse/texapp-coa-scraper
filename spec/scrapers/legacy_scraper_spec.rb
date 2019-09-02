@@ -4,6 +4,7 @@ describe "LegacyScraper" do
   # down to just one COA, the Thirteenth Court.
 
   describe "Thirteenth Court page" do
+=begin
 
 		before(:all) do
 			@coa = "13"
@@ -53,5 +54,6 @@ describe "LegacyScraper" do
 			target[:opinion_urls]["pdf"].should eq("/opinions/PDFOpinion.asp?OpinionId=20649")
 			target[:opinion_urls].count.should eq(2)
 		end
+=end
 	end
 end

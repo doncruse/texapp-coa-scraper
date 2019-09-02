@@ -2,6 +2,7 @@
 require 'nokogiri'
 require 'open-uri'
 require 'date'
+require 'active_support'
 require 'active_support/core_ext'
 
 module CoaOpScraper
@@ -20,7 +21,7 @@ module CoaOpScraper
       alt_targets = data.search("table[class=rgMasterTable]").search("tr[class=rgAltRow]")
       targets = main_targets + alt_targets
 
-      raw_release_date = data.search("span.TitleBlue").search("span")[1].inner_text
+      raw_release_date = data.search(".panel-heading").search("span").first.inner_text
       release_date = self.date_from_oddball(raw_release_date.strip_both_ends)
 
       results = []
@@ -64,9 +65,9 @@ module CoaOpScraper
     end # returns an array of opinion_metadata hashes
 
     def self.date_from_oddball(date_string)
-      return Nil unless date_string.match(/\d\d\/\d\d\/\d\d\d\d/)
-      parts = date_string.split("/")
-      whole = parts[1] + "-" + parts[0] + "-" + parts[2]
+      return Nil unless date_string.match(/(\d{1,2}\/\d{1,2}\/\d\d\d\d)/)
+      parts = $1.split("/")
+      whole = parts[2] + "-" + parts[0] + "-" + parts[1]
       whole.to_date
     end
 
