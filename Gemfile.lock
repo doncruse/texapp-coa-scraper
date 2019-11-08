@@ -40,6 +40,7 @@ GEM
     arel (6.0.3)
     builder (3.2.2)
     concurrent-ruby (1.0.2)
+    crass (1.0.5)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
@@ -72,7 +73,8 @@ GEM
       semver
     json (1.8.3)
     jwt (1.5.1)
-    loofah (2.0.3)
+    loofah (2.3.1)
+      crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
