@@ -1,11 +1,11 @@
-$:.unshift File.dirname(__FILE__) + '/../lib'
-require 'coa-op-scraper'
-require 'support/vcr'
+$LOAD_PATH.unshift File.expand_path("../lib", __dir__)
+require "coa-op-scraper"
+require "support/vcr"
 
 RSpec.configure do |config|
-  config.treat_symbols_as_metadata_keys_with_true_values = true
-  config.run_all_when_everything_filtered = true
-  config.filter_run :focus
-end
+  # The existing specs use the older `should` syntax; keep it enabled
+  # alongside `expect` rather than rewriting every assertion.
+  config.expect_with(:rspec) { |c| c.syntax = %i[should expect] }
 
-# per http://www.intridea.com/blog/2012/3/8/polishing-rubies-part-iii
+  config.filter_run_when_matching :focus
+end

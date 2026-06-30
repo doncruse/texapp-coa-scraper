@@ -73,7 +73,7 @@ protected
 
   def self.retrieve_list_for_coa_for_date(coa,date)
     url = self.url_for_coa_for_date(coa,date)
-    open(url)
+    URI.open(url)
   end
 end
 

@@ -1,22 +1,15 @@
-source "http://rubygems.org"
+source "https://rubygems.org"
 
-gem 'nokogiri'
-gem 'rails'
+# Runtime dependencies (activesupport, nokogiri) come from the gemspec.
+gemspec
 
 group :development, :test do
-  gem 'rspec-rails'
+  gem "rake"
+  gem "rspec"
 end
 
 group :test do
-  gem 'timecop'
-  gem 'vcr' #, '~> 2.0.rc'
-  gem 'fakeweb'
-end
-
-# Add dependencies to develop your gem here.
-# Include everything needed to run rake, tests, features, etc.
-group :development do
-  gem "rdoc" #, "~> 3.12"
-  gem "bundler" #, "~> 1.0.0"
-  gem "jeweler" #, "~> 1.8.4"
+  gem "timecop"
+  gem "vcr"
+  gem "webmock"
 end
