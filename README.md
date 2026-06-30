@@ -6,8 +6,8 @@ This gem understands how to parse the opinion lists released by each of
 Texas's fourteen intermediate courts of appeals.
 
 Opinion releases are announced on a separate webpage for each court of
-appeals.  Some courts use a legacy system; others have shifted to the new
-TAMES system employed by the Texas Supreme Court.
+appeals.  All fourteen courts now use the TAMES system employed by the
+Texas Supreme Court.
 
 ### Why does this gem exist?
 

@@ -1,6 +1,5 @@
 # encoding=utf-8
 module CoaOpScraper
-  require 'legacy'
   require 'tames'
   require 'coa_docket_no'
   require 'tames_link'
@@ -18,10 +17,10 @@ module CoaOpScraper
 
   @@check_weekends = false
 
-  # A court's placement in one of these two hashes tells you about the webpage format
-  # currently used by that court.
+  # All fourteen intermediate courts of appeals now use the TAMES system.
+  # (Historically some courts remained on a legacy per-court format; that
+  # scraper has been removed.)
   TAMES_COAS = [ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14" ]
-  LEGACY_COAS = [ ]
 
   ############################################################
   # This is the easiest method to use here.  Feed it a COA value
@@ -32,8 +31,6 @@ module CoaOpScraper
     doc = self.retrieve_list_for_coa_for_date(coa,target_date)
     if CoaOpScraper::TAMES_COAS.include?(coa)
       CoaOpScraper::Tames.parse_opinion_list(doc, coa)
-    elsif CoaOpScraper::LEGACY_COAS.include?(coa)
-      CoaOpScraper::Legacy.parse_opinion_list(doc)
     end
   end
 
@@ -66,8 +63,6 @@ protected
   def self.url_for_coa_for_date(coa,date)
     if CoaOpScraper::TAMES_COAS.include?(coa)
       CoaOpScraper::Tames.url_for_coa_for_date(coa,date)
-    elsif CoaOpScraper::LEGACY_COAS.include?(coa)
-      CoaOpScraper::Legacy.url_for_coa_for_date(coa,date)
     end
   end
 
