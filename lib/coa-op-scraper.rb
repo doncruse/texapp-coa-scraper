@@ -17,10 +17,10 @@ module CoaOpScraper
 
   @@check_weekends = false
 
-  # All fourteen intermediate courts of appeals now use the TAMES system.
-  # (Historically some courts remained on a legacy per-court format; that
-  # scraper has been removed.)
-  TAMES_COAS = [ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14" ]
+  # These are the fifteen Texas courts of appeals.
+  # All fifteen use this consistent opinions-page format.
+  # (Code related to a legacy format has been removed as outdated.)
+  TAMES_COAS = [ "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15" ]
 
   ############################################################
   # This is the easiest method to use here.  Feed it a COA value

@@ -8,15 +8,9 @@ require 'active_support/core_ext'
 module CoaOpScraper
   module Tames
 
-    # NOTE: The live format has changed in two ways since these URLs were
-    # recorded and is now, e.g.:
-    #   https://search.txcourts.gov/Docket.aspx?coa=coa03&FullDate=06/30/2026
-    #   (1) https, not http   (2) no "www." prefix
-    # Left as http://www. for now so the existing VCR cassettes keep matching;
-    # update when we revisit scraping against the live site (functional pass).
     def self.url_for_coa_for_date(coa,date)
       datestring = date.to_date.strftime("%m/%d/%Y")
-      root_path = "http://www.search.txcourts.gov/Docket.aspx?coa="
+      root_path = "https://search.txcourts.gov/Docket.aspx?coa="
       root_path + "coa#{coa}&FullDate=#{datestring}"
     end
 
