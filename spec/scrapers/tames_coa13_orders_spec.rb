@@ -28,8 +28,8 @@ describe "Thirteenth Court of Appeals orders list (TAMES)" do
 
   it "treats every row as an order (no opinion-on-the-merits author/panel)" do
     @data_array.each do |row|
-      expect(row[:author_string]).to match(/\AOrder\s*\z/)  # not "... Opinion by Justice X"
-      expect(row[:panel_string]).to eq("")                  # orders list no panel here
+      expect(row[:author_string]).to eq("Order")  # not "... Opinion by Justice X"
+      expect(row[:panel_string]).to eq("")         # orders list no panel here
     end
   end
 

@@ -72,15 +72,25 @@ protected
   end
 end
 
-# This is required (and helpful) to parse Texas court docket pages
+# This is required (and helpful) to parse Texas court docket pages.
+#
+# The Texas court pages have long sprinkled non-breaking spaces (U+00A0)
+# through their cell text. Ruby's String#strip and \s only touch ASCII
+# whitespace and leave U+00A0 in place -- which is what the hand-rolled nbsp
+# peeling was working around. The POSIX [[:space:]] class is Unicode-aware and
+# *does* match U+00A0, so strip_both_ends collapses to a single anchored gsub
+# (verified identical to the old multi-pass version across every combination of
+# leading/trailing whitespace + non-breaking spaces).
 class String
+  def strip_both_ends
+    gsub(/\A[[:space:]]+|[[:space:]]+\z/, "")
+  end
+
+  # Superseded by strip_both_ends; kept because this is a public String
+  # extension (the consuming apps define their own copy of this method too).
   def nbsp_strip
     strip.gsub(/\u00a0$/,"").gsub(/^\u00a0/,"").strip
   end # gets rid of some pesky unicode found on Texas OCA sites
-
-  def strip_both_ends
-    nbsp_strip.nbsp_strip.reverse.nbsp_strip.nbsp_strip.reverse
-  end
 end
 
 class Date

@@ -44,7 +44,7 @@ module CoaOpScraper
         # within the opinion set
         # N.B., this also contains information about dissent/memorandum/etc.
         if t.search("div").search("td").first
-          result[:author_string] = t.search("div").search("td").first.inner_text
+          result[:author_string] = t.search("div").search("td").first.inner_text.strip_both_ends
         end
 
         # other <TD> elements
@@ -52,7 +52,7 @@ module CoaOpScraper
         # penultimate is the disposition
         # antepenultimate is the case style--origin
 
-        result[:panel_string] = t.search("td")[-1].to_html.split(/[<>]/).select { |x| x.match(/Ju[ds]/) }.join(",").gsub("  "," ")
+        result[:panel_string] = t.search("td")[-1].to_html.split(/[<>]/).select { |x| x.match(/Ju[ds]/) }.map { |x| x.strip_both_ends }.join(",")
         result[:disposition] = t.search("td")[-2].inner_text.downcase.strip_both_ends.gsub(/:$/,"")
 
         tames_style = TamesCaseStyle.new(t)

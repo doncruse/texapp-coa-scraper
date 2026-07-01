@@ -38,11 +38,9 @@ describe "Fifteenth Court of Appeals (TAMES)" do
       expect(target[:release_date]).to eq(@date)
     end
 
-    it "captures the authoring justice and the full panel" do
-      expect(target[:author_string]).to match(/Memorandum Opinion by Justice Farris/)
-      expect(target[:panel_string]).to match(/Chief Justice Brister/)
-      expect(target[:panel_string]).to match(/Justice Field/)
-      expect(target[:panel_string]).to match(/Justice Farris/)
+    it "captures the authoring justice and the full panel (whitespace normalized)" do
+      expect(target[:author_string]).to eq("Memorandum Opinion by Justice Farris")
+      expect(target[:panel_string]).to eq("Chief Justice Brister,Justice Field,Justice Farris")
     end
 
     it "captures the docket page link" do
