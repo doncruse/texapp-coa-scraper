@@ -10,7 +10,7 @@ module CoaOpScraper
 
     def self.url_for_coa_for_date(coa,date)
       datestring = date.to_date.strftime("%m/%d/%Y")
-      root_path = "http://www.search.txcourts.gov/Docket.aspx?coa="
+      root_path = "https://search.txcourts.gov/Docket.aspx?coa="
       root_path + "coa#{coa}&FullDate=#{datestring}"
     end
 
@@ -44,7 +44,7 @@ module CoaOpScraper
         # within the opinion set
         # N.B., this also contains information about dissent/memorandum/etc.
         if t.search("div").search("td").first
-          result[:author_string] = t.search("div").search("td").first.inner_text
+          result[:author_string] = t.search("div").search("td").first.inner_text.strip_both_ends
         end
 
         # other <TD> elements
@@ -52,7 +52,7 @@ module CoaOpScraper
         # penultimate is the disposition
         # antepenultimate is the case style--origin
 
-        result[:panel_string] = t.search("td")[-1].to_html.split(/[<>]/).select { |x| x.match(/Ju[ds]/) }.join(",").gsub("  "," ")
+        result[:panel_string] = t.search("td")[-1].to_html.split(/[<>]/).select { |x| x.match(/Ju[ds]/) }.map { |x| x.strip_both_ends }.join(",")
         result[:disposition] = t.search("td")[-2].inner_text.downcase.strip_both_ends.gsub(/:$/,"")
 
         tames_style = TamesCaseStyle.new(t)
@@ -65,7 +65,7 @@ module CoaOpScraper
     end # returns an array of opinion_metadata hashes
 
     def self.date_from_oddball(date_string)
-      return Nil unless date_string.match(/(\d{1,2}\/\d{1,2}\/\d\d\d\d)/)
+      return nil unless date_string.match(/(\d{1,2}\/\d{1,2}\/\d\d\d\d)/)
       parts = $1.split("/")
       whole = parts[2] + "-" + parts[0] + "-" + parts[1]
       whole.to_date
