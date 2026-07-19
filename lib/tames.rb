@@ -52,7 +52,11 @@ module CoaOpScraper
         # penultimate is the disposition
         # antepenultimate is the case style--origin
 
-        result[:panel_string] = t.search("td")[-1].to_html.split(/[<>]/).select { |x| x.match(/Ju[ds]/) }.map { |x| x.strip_both_ends }.join(",")
+        # Keep judicial titles: Ju[ds] matches "Justice"/"Judge"; "Honorable"
+        # catches a judge sitting by assignment, styled "The Honorable X"
+        # rather than "Justice X" (dropping that member silently under-reports
+        # the panel -- e.g. coa15 2026-07-09, 15-25-00033-CV).
+        result[:panel_string] = t.search("td")[-1].to_html.split(/[<>]/).select { |x| x.match(/Ju[ds]|Honorable/) }.map { |x| x.strip_both_ends }.join(",")
         result[:disposition] = t.search("td")[-2].inner_text.downcase.strip_both_ends.gsub(/:$/,"")
 
         tames_style = TamesCaseStyle.new(t)

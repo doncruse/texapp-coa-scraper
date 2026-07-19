@@ -52,7 +52,6 @@ describe "Fifteenth Court of Appeals (TAMES), 2026-07-09" do
     end
 
     it "captures the full three-member panel, including the assigned judge" do
-      pending "panel filter in Tames.parse_opinion_list keeps only /Ju[ds]/ tokens, dropping 'The Honorable Rose'"
       # The court's markup for this row is:
       #   Chief Justice Brister <br>Justice Field <br>The Honorable Rose <br>
       # A judge sitting by assignment is styled "The Honorable X", so the
