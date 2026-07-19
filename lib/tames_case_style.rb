@@ -52,9 +52,15 @@ module CoaOpScraper
       end
 
       def text_outside_of_span
-        possible_match = overall_text.match(/#{text_within_span}(.*)/)
-        capture = possible_match.captures.first
-        capture.strip_both_ends if capture and capture.strip_both_ends.size > 0
+        # The origin is whatever cell text follows the style <span>. Slice the
+        # span text off literally rather than interpolating it into a Regexp:
+        # arbitrary style text breaks the match on regex-special characters in
+        # long/complex names (e.g. an 878-char style with parentheses/brackets),
+        # where .match returns nil and .captures then raises. new_format? already
+        # guarantees the cell begins with the span text.
+        return nil unless overall_text.start_with?(text_within_span)
+        capture = overall_text[text_within_span.length..].to_s.strip_both_ends
+        capture if capture.size > 0
       end # might return nil
 
       # <td><span>Party Name v. Other Party</span> Court name where from</td>
